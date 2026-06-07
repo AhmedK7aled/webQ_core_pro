@@ -276,8 +276,8 @@ const FINAL_DATA = {
       topic: 'CSS Basics',
       question: 'CSS stands for:',
       options: ['Cascade style sheets', 'Color and style sheets', 'Cascading style systems', 'Correct style sheets'],
-      correctIndex: 0,
-      answerText: 'A'
+      correctIndex: 2,
+      answerText: 'C'
     },
     {
       id: 'f-mcq-31',
