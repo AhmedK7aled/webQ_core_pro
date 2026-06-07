@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebQ core pro — A comprehensive web programming learning platform for university students. Track progress, and master HTML, CSS & JavaScript.">
+    <title>WebQ core pro — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="bdf5019f-ab4c-484a-9d8c-2128169dc27f"></script>
+</head>
+<body>
+    <div class="app-layout">
+
+        <!-- ======== SIDEBAR ======== -->
+        <aside class="sidebar" aria-label="Main Navigation">
+            <div class="sidebar-brand">
+                <div class="brand-icon">W</div>
+                <div class="brand-text">
+                    WebQ core pro
+                    <small>Web Programming Study Hub</small>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Modules</div>
+                <a href="index.html" class="nav-link active" aria-label="Dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="midterm/index.html" class="nav-link" aria-label="Midterm Exam">
+                    <span class="nav-icon">📝</span>
+                    <span>Midterm Exam</span>
+                    <span class="nav-badge">34</span>
+                </a>
+                <a href="questions/index.html" class="nav-link" aria-label="Questions Bank">
+                    <span class="nav-icon">📚</span>
+                    <span>Questions Bank</span>
+                    <span class="nav-badge">67</span>
+                </a>
+                <a href="final/index.html" class="nav-link" aria-label="Final Exam">
+                    <span class="nav-icon">🎓</span>
+                    <span>Final Exam</span>
+                    <span class="nav-badge">112</span>
+                </a>
+
+                <div class="nav-section-title" style="margin-top: 16px;">Tools</div>
+                <a href="bookmarks/index.html" class="nav-link" aria-label="Bookmarks">
+                    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-top: -2px;"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span>
+                    <span>Bookmarks</span>
+                    <span class="nav-badge" id="sidebar-bookmarks-count">0</span>
+                </a>
+                <a href="#" class="nav-link" onclick="openPlayerProfile(); return false;" aria-label="Player Profile">
+                    <span class="nav-icon">👤</span>
+                    <span>Player Profile</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-progress">
+                    <div class="sidebar-progress-label">
+                        <span>Overall Progress</span>
+                        <span class="sidebar-progress-percent">0%</span>
+                    </div>
+                    <div class="sidebar-progress-bar">
+                        <div class="sidebar-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="sidebar-progress-label" style="margin-top: 4px;">
+                        <span class="sidebar-progress-count">0/0</span>
+                        <span>Session: <span id="session-count">0</span></span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ======== SIDEBAR OVERLAY (Mobile) ======== -->
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+        <!-- ======== MAIN CONTENT ======== -->
+        <main class="main-content">
+            <div class="content-wrapper">
+
+                <!-- Hero Section -->
+                <section class="dashboard-hero" id="dashboard-hero">
+                    <h1>WebQ core pro</h1>
+                    <p class="hero-subtitle">Your comprehensive study companion for mastering web programming. Track your progress, and ace your exams.</p>
+                    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative;">
+                        <a href="midterm/index.html" class="btn btn-primary">Start Studying →</a>
+                        <button class="btn btn-secondary" onclick="document.getElementById('quick-actions-section').scrollIntoView({behavior:'smooth'})">Manage Progress</button>
+                    </div>
+                </section>
+
+                <!-- Global Stats -->
+                <section class="global-stats" aria-label="Global Statistics">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-questions">213</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-completed">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-percent">0%</div>
+                        <div class="stat-label">Overall Progress</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="session-count-hero">0</div>
+                        <div class="stat-label">This Session</div>
+                    </div>
+                </section>
+
+                <!-- Module Cards -->
+                <section class="modules-grid" aria-label="Study Modules">
+
+                    <!-- Midterm Module -->
+                    <a href="midterm/index.html" class="module-card module-midterm">
+                        <div class="module-card-header">
+                            <div class="module-icon">📝</div>
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" viewBox="0 0 64 64">
+                                    <circle class="progress-ring-bg" cx="32" cy="32" r="26"/>
+                                    <circle class="progress-ring-fill" cx="32" cy="32" r="26" style="stroke-dasharray: 163.36; stroke-dashoffset: 163.36;"/>
+                                </svg>
+                                <span class="progress-ring-text">0%</span>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Midterm Exam</h3>
+                        <p class="module-desc">Midterm exam review covering HTML basics, CSS fundamentals, and web concepts. Includes multiple choice and fill-in-the-blank questions.</p>
+                        <div class="module-stats">
+                            <span class="module-stat-chip">10 MCQ</span>
+                            <span class="module-stat-chip">24 Complete</span>
+                            <span class="module-stat-chip module-completed">0 done</span>
+                        </div>
+                        <div class="module-link-arrow">
+                            Open Module →
+                        </div>
+                    </a>
+
+                    <!-- Questions Bank Module -->
+                    <a href="questions/index.html" class="module-card module-questions">
+                        <div class="module-card-header">
+                            <div class="module-icon">📚</div>
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" viewBox="0 0 64 64">
+                                    <circle class="progress-ring-bg" cx="32" cy="32" r="26"/>
+                                    <circle class="progress-ring-fill" cx="32" cy="32" r="26" style="stroke-dasharray: 163.36; stroke-dashoffset: 163.36;"/>
+                                </svg>
+                                <span class="progress-ring-text">0%</span>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Questions Bank</h3>
+                        <p class="module-desc">Comprehensive CSS & HTML question bank for practice and review. Covers properties, selectors, layout, and more.</p>
+                        <div class="module-stats">
+                            <span class="module-stat-chip">53 MCQ</span>
+                            <span class="module-stat-chip">14 Short Answer</span>
+                            <span class="module-stat-chip module-completed">0 done</span>
+                        </div>
+                        <div class="module-link-arrow">
+                            Open Module →
+                        </div>
+                    </a>
+
+                    <!-- Final Exam Module -->
+                    <a href="final/index.html" class="module-card module-final">
+                        <div class="module-card-header">
+                            <div class="module-icon">🎓</div>
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" viewBox="0 0 64 64">
+                                    <circle class="progress-ring-bg" cx="32" cy="32" r="26"/>
+                                    <circle class="progress-ring-fill" cx="32" cy="32" r="26" style="stroke-dasharray: 163.36; stroke-dashoffset: 163.36;"/>
+                                </svg>
+                                <span class="progress-ring-text">0%</span>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Final Exam</h3>
+                        <p class="module-desc">Complete final exam review covering HTML, CSS, JavaScript, and web fundamentals. Includes MCQ, complete, and true/false questions.</p>
+                        <div class="module-stats">
+                            <span class="module-stat-chip">69 MCQ</span>
+                            <span class="module-stat-chip">23 Complete</span>
+                            <span class="module-stat-chip">20 T/F</span>
+                            <span class="module-stat-chip module-completed">0 done</span>
+                        </div>
+                        <div class="module-link-arrow">
+                            Open Module →
+                        </div>
+                    </a>
+
+                    <!-- Bookmarks Module -->
+                    <a href="bookmarks/index.html" class="module-card module-bookmarks">
+                        <div class="module-card-header">
+                            <div class="module-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></div>
+                        </div>
+                        <h3 class="module-title">Bookmarks</h3>
+                        <p class="module-desc">Your curated list of saved questions across all modules. Review your bookmarks here.</p>
+                        <div class="module-stats">
+                            <span class="module-stat-chip"><span id="bookmarks-count-card">0</span> Saved</span>
+                        </div>
+                        <div class="module-link-arrow">
+                            Open Bookmarks →
+                        </div>
+                    </a>
+
+                </section>
+
+                <!-- Quick Actions -->
+                <section class="quick-actions" id="quick-actions-section" aria-label="Quick Actions">
+                    <div class="quick-actions-title">Progress Management</div>
+                    <button class="btn btn-primary" onclick="exportProgress()" id="export-btn">
+                        📤 Export Progress
+                    </button>
+                    <label class="btn btn-secondary" style="cursor: pointer;">
+                        📥 Import Progress
+                        <input type="file" accept=".json" onchange="importProgress(this)" style="display:none;">
+                    </label>
+                    <button class="btn btn-danger" onclick="resetProgress()" id="reset-btn">
+                        🗑 Reset Progress
+                    </button>
+                    <button class="btn btn-secondary" onclick="printView()" id="print-btn">
+                        🖨 Print / PDF
+                    </button>
+                </section>
+
+            </div>
+        </main>
+
+
+
+        <!-- Mobile Toggle -->
+        <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle Navigation">☰</button>
+
+    </div>
+
+
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts — load all data for dashboard stats -->
+    <script src="midterm/data.js"></script>
+    <script src="questions/data.js"></script>
+    <script src="final/data.js"></script>
+    <script src="shared/db.js"></script>
+    <script src="shared/core.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initDashboard();
+
+            // Also update the hero session count
+            const heroSession = document.getElementById('session-count-hero');
+            if (heroSession) heroSession.textContent = STATE.sessionAnswered;
+        });
+    </script>
+</body>
+</html>
